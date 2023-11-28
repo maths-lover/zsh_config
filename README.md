@@ -20,7 +20,7 @@ version is **4.3.11**.
 02. Clone the repository:
 
     ```console
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://code.devsuraj.pro/zsh_dots "${ZDOTDIR:-$HOME}/.zprezto"
     ```
 
     <details>
@@ -34,7 +34,7 @@ version is **4.3.11**.
       - Clone the repository:
 
         ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+        git clone --recursive https://code.devsuraj.pro/zsh_dots "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
 
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
@@ -144,7 +144,7 @@ accompanying README files to learn about what is available.
 
 The project is managed via [Git][3]. We highly recommend that you fork this
 project so that you can commit your changes and push them to your fork on
-[GitHub][4] to preserve them. If you do not know how to use Git, follow this
+[GitHub][4] or [GitLab][12] to preserve them. If you do not know how to use Git, follow this
 [tutorial][5] and bookmark this [reference][6].
 
 ## Resources
@@ -166,3 +166,4 @@ This project is licensed under the MIT License.
 [9]: modules#readme
 [10]: runcoms#readme
 [11]: modules/git#readme
+[12]: https://gitlab.com
