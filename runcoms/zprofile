@@ -18,10 +18,10 @@ fi
 #
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
+  export EDITOR='nvim'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+  export VISUAL='nvim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
@@ -34,6 +34,23 @@ fi
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
+
+#
+# Dev dir
+#
+export DEV_DIR="$HOME/dev"
+export DEV_TOOLS_DIR="$DEV_DIR/dev_tools"
+
+#
+# Go environment variables
+#
+export GOPATH="$DEV_DIR/go"
+export GOBIN="$GOPATH/bin"
+
+#
+# nvm, node, npm, etc.
+#
+export NVM_DIR="$DEV_TOOLS_DIR/nvm"
 
 #
 # Paths
@@ -50,9 +67,13 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/{,s}bin(N)
+  $GOBIN(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $path
+  $HOME/.spicetify(N)
+  $HOME/.local/bin(N)
+  /usr/local/go/bin(N)
 )
 
 #

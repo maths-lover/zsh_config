@@ -10,4 +10,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# below line is so that starship theme launches properly
+setopt prompt_subst interactive_comments
+
 # Customize to your needs...
+# set pywal colorscheme by default
+#cat ~/.cache/wal/sequences
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
