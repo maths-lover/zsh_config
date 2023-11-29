@@ -29,7 +29,7 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
-# I've disabled gpg and ssh
+# I've disabled gpg
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
