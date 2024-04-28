@@ -18,3 +18,48 @@ setopt prompt_subst interactive_comments
 #cat ~/.cache/wal/sequences
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# pac-log function shows upto n most recently installed or removed packages in arch linux or arch based distros
+function pac-log {
+    # Usage: pac-log [n=20]
+    #    show persisting installs/removes in last n lines of pacman.log (install X...remove X pairs and the converse are filtered out)
+    {
+        if [[ -e /var/log/pacman.log.1 ]]; then
+            cat /var/log/pacman.log.1
+        elif [[ -e /var/log/pacman.log.1.gz ]]; then
+            zcat /var/log/pacman.log.1.gz
+        fi
+        cat /var/log/pacman.log
+    } \
+    | grep -E '] installed|] removed' | tail -n "${1-20}" \
+    | python3 <(cat << EOF
+import re, sys
+
+pkgre = re.compile(r".* (installed|removed) ([^ ]*) .*")
+
+lines = []
+hist = {
+    "installed": {},
+    "removed": {},
+}
+otheract = {
+    "installed": "removed",
+    "removed": "installed",
+}
+li = 0
+
+for log in sys.stdin:
+    m = pkgre.match(log)
+    if m:
+        action, pkg = m.groups()
+        hist[action].setdefault(pkg, []).append(li)
+        lines.append((li, action, pkg, log[:-1]))
+        li += 1
+
+for li, action, pkg, line in lines:
+    if li == hist[action][pkg][-1] and li > hist[otheract[action]].get(pkg, [-1])[0]:
+        print(f"{line}")
+EOF
+)
+
+}

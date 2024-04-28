@@ -6,6 +6,13 @@
 #
 
 #
+# Terminal
+#
+if [[ -z "$TERMINAL" ]]; then
+  export TERMINAL='wezterm'
+fi
+
+#
 # Browser
 #
 
@@ -21,7 +28,7 @@ if [[ -z "$EDITOR" ]]; then
   export EDITOR='nvim'
 fi
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nvim'
+  export VISUAL='neovide --no-fork'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
@@ -53,6 +60,11 @@ export GOBIN="$GOPATH/bin"
 export NVM_DIR="$DEV_TOOLS_DIR/nvm"
 
 #
+# pyenv
+#
+export PYENV_ROOT="$DEV_TOOLS_DIR/pyenv"
+
+#
 # Paths
 #
 
@@ -66,6 +78,8 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  $PYENV_ROOT/bin(N)
+  $PYENV_ROOT/shims(N)
   $HOME/{,s}bin(N)
   $GOBIN(N)
   /opt/{homebrew,local}/{,s}bin(N)
@@ -92,3 +106,6 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+# eval pyenv init - for pyenv
+eval "$(pyenv init -)"
