@@ -113,6 +113,14 @@ else
   fi
 fi
 
+
+# above is fine, but if there is exa installed then set ls as exa
+# and rewrite the shortcuts with exa specific ones
+if (( $+commands[exa] )); then
+  alias ls='exa --icons --git'
+
+fi
+
 alias l='ls -1A'         # Lists in one column, hidden files.
 alias ll='ls -lh'        # Lists human readable sizes.
 alias lr='ll -R'         # Lists human readable sizes, recursively.
