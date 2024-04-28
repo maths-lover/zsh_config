@@ -1,0 +1,10 @@
+#
+# Display git diff with bat
+#
+# Authors:
+#   Suraj Pal Singh <dev.suraj.pal@gmail.com>
+#
+
+# function batdiff {
+    git diff --name-only --relative --diff-filter=d | xargs bat --diff
+# }

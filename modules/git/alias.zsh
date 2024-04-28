@@ -272,4 +272,6 @@ if ! zstyle -t ':prezto:module:git:alias' skip; then
   alias gwC='git clean --force'
   alias gwx='git rm -r'
   alias gwX='git rm -r --force'
+
+  alias gdiff='batdiff'
 fi
