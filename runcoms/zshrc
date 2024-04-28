@@ -64,6 +64,14 @@ EOF
 
 }
 
+# thefuck to auto correct the commands
+eval $(thefuck --alias)
+
+# zoxide (better cd)
+eval "$(zoxide init zsh)"
+
+alias cd="z"
+
 # setup fzf
 source ~/.fzf.zsh || return 1
 
@@ -95,11 +103,3 @@ _fzf_comprun() {
         *) fzf --preview 'bat -n --color=always --line-range :500 {}' "$@" ;;
     esac
 }
-
-# thefuck to auto correct the commands
-eval $(thefuck --alias)
-
-# zoxide (better cd)
-eval "$(zoxide init zsh)"
-
-alias cd="z"
