@@ -31,7 +31,7 @@ if [[ -z "$VISUAL" ]]; then
   export VISUAL='neovide --no-fork'
 fi
 if [[ -z "$PAGER" ]]; then
-  export PAGER='bat --paging=always --pager=less'
+  export PAGER='less'
 fi
 
 #
