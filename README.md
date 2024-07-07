@@ -9,20 +9,20 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
 01. Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` for defining config location
     for zsh:
 
-    ```console
+    ```shell
     export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
     [[ -d $XDG_CONFIG_HOME/zsh ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
     ```
 
 02. Clone this repo in `$ZDOTDIR` directory:
 
-    ```console
+    ```shell
     git clone --recursive https://github.com/maths-lover/zsh_config $ZDOTDIR/.zprezto
     ```
 
 03. Setup runcoms, zshenv and aliases in user home:
 
-    ```console
+    ```shell
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -37,13 +37,13 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
 
 04. Source zshenv to take effect or just open a new terminal and execute zsh
 
-    ```console
+    ```shell
     source $ZDOTDIR/.zshenv
     ```
 
 05. (Optional) Change shell to zsh as default on login
 
-    ```console
+    ```shell
     chsh -s /bin/zsh
     ```
 
@@ -61,7 +61,7 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
     To install this, execute following, but don't make changes to zshrc in last step
     and setup `FZF_INSTALL_DIR`
 
-    ```console
+    ```shell
     export FZF_INSTALL_DIR="$HOME/.fzf"
 
     # also update the zprofile for your path
@@ -71,8 +71,8 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_INSTALL_DIR
     $FZF_INSTALL_DIR/install
 
-    # to access in current console
-    export PATH="$PATH:$FZF_INSTALL_DIR/bin" # only in current console
+    # to access in current shell
+    export PATH="$PATH:$FZF_INSTALL_DIR/bin" # only in current shell
 
     # check for success
     fzf --version
@@ -82,7 +82,7 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
 
     Install it same like fzf and set fzf-git installation dir
 
-    ```console
+    ```shell
     export FZF_GIT_INSTALL_DIR="$HOME/.fzf-git.sh"
 
     # also update zprofile
@@ -98,14 +98,14 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
 
     Install starship with following command,
 
-    ```console
+    ```shell
     curl -sS https://starship.rs/install.sh | sh
     ```
 
     or just use your package manager to install it,
     e.g., for Arch Linux,
 
-    ```console
+    ```shell
     sudo pacman -S starship
     ```
 
@@ -113,7 +113,7 @@ Now to install my zsh_config (which is just prezto but customized to my needs)
 
     Then symlink the starship prompt config (if you want so)
 
-    ```console
+    ```shell
     ln -sv $ZDOTDIR/.zprezto/starship.toml $XDG_CONFIG_HOME/starship.toml
     ```
 
