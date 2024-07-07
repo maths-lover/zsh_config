@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Suraj Pal Singh <dev.suraj.pal@gmail.com>
 #
 
 #
@@ -62,7 +63,15 @@ export NVM_DIR="$DEV_TOOLS_DIR/nvm"
 #
 # pyenv
 #
-export PYENV_ROOT="$DEV_TOOLS_DIR/pyenv"
+if command -v "pyenv" > /dev/null 2>&1; then
+    export PYENV_ROOT="$DEV_TOOLS_DIR/pyenv"
+    eval "$(pyenv init -)"
+fi
+
+# optional tools
+export FZF_INSTALL_DIR="$DEV_TOOLS_DIR/fzf"
+export FZF_GIT_INSTALL_DIR="$DEV_TOOLS_DIR/fzf-git.sh"
+export USE_THEFUCK="true"
 
 #
 # Paths
@@ -80,14 +89,15 @@ typeset -gU cdpath fpath mailpath path
 path=(
   $PYENV_ROOT/bin(N)
   $PYENV_ROOT/shims(N)
+  $path
+  /usr/local/go/bin(N)
   $HOME/{,s}bin(N)
   $GOBIN(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
-  $path
   $HOME/.spicetify(N)
   $HOME/.local/bin(N)
-  /usr/local/go/bin(N)
+  $FZF_INSTALL_DIR/bin(N)
 )
 
 #
@@ -106,6 +116,3 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
-
-# eval pyenv init - for pyenv
-eval "$(pyenv init -)"

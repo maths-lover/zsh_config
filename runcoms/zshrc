@@ -3,6 +3,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Suraj Pal Singh <dev.suraj.pal@gmail.com>
 #
 
 # Source Prezto.
@@ -65,32 +66,56 @@ EOF
 }
 
 # thefuck to auto correct the commands
-eval $(thefuck --alias)
+should_use=$(echo "$USE_THEFUCK" | tr '[:upper:]' '[:lower:]')
+if [ "$should_use" = "true" ] || [ "$should_use" = "yes" ]; then
+    eval $(thefuck --alias)
+fi
 
 # zoxide (better cd)
-eval "$(zoxide init zsh)"
-
-alias cd="z"
+if command -v "zoxide" > /dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+else
+    echo "zoxide not found" || return 1
+fi
 
 # setup fzf
-source ~/.fzf.zsh || return 1
+if command -v "fzf" > /dev/null 2>&1; then
+    # PATH should be setup in `$ZDOTDIR/.zprofile`
+    eval "$(fzf --zsh)"
+    # source ~/.fzf.zsh || return 1
+    source $FZF_GIT_INSTALL_DIR/fzf-git.sh
+else
+    echo "fzf not installed" || return 1
+fi
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+# Ask user to install fd (better find)
+if command -v "fd" > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
-}
+    _fzf_compgen_path() {
+      fd --hidden --exclude .git . "$1"
+    }
 
-_fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
-}
+    _fzf_compgen_dir() {
+      fd --type=d --hidden --exclude .git . "$1"
+    }
+else
+    echo "fd not installed, please install it" || return 1
+fi
 
-source $HOME/dev/dev_tools/fzf-git.sh/fzf-git.sh
-
-export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -200'"
+# Ask user to install bat (cat with wings) and eza (better ls)
+if command -v "bat" > /dev/null 2>&1 || command -v "batcat" > /dev/null 2>&1; then
+    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
+else
+    echo "bat (cat clone with wings) not found, please install it" || return 1
+fi
+if command -v "eza" > /dev/null 2>&1; then
+    export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -200'"
+else
+    echo "eza not found, please install it" || return 1
+fi
 
 _fzf_comprun() {
     local command=$1
@@ -103,3 +128,6 @@ _fzf_comprun() {
         *) fzf --preview 'bat -n --color=always --line-range :500 {}' "$@" ;;
     esac
 }
+
+# source custom aliases
+source "${ZDOTDIR:-$HOME}/.alias.zsh"
