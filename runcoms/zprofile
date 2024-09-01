@@ -56,6 +56,11 @@ export GOPATH="$DEV_DIR/go"
 export GOBIN="$GOPATH/bin"
 
 #
+# Go environment variables
+#
+export CARGO_BIN="$HOME/.cargo/bin"
+
+#
 # nvm, node, npm, etc.
 #
 export NVM_DIR="$DEV_TOOLS_DIR/nvm"
@@ -93,6 +98,7 @@ path=(
   /usr/local/go/bin(N)
   $HOME/{,s}bin(N)
   $GOBIN(N)
+  $CARGO_BIN(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $HOME/.spicetify(N)

@@ -14,6 +14,9 @@ fi
 # below line is so that starship theme launches properly
 setopt prompt_subst interactive_comments
 
+# disable any beeps
+setopt no_beep
+
 # Customize to your needs...
 # set pywal colorscheme by default
 #cat ~/.cache/wal/sequences
