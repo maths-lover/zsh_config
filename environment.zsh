@@ -138,11 +138,6 @@ export MYSQL_HISTFILE="${XDG_DATA_HOME}/mysql_history"
 export SQLITE_HISTORY="${XDG_DATA_HOME}/sqlite_history"
 
 # ============================================================================
-# colima and docker stuff
-# ============================================================================
-export DOCKER_HOST="unix:///var/run/docker.sock"
-
-# ============================================================================
 # Homebrew
 # ============================================================================
 if [[ -f /opt/homebrew/bin/brew ]]; then
