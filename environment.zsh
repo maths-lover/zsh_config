@@ -99,12 +99,6 @@ export LESS_TERMCAP_ue=$'\e[0m'         # reset underline
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1
-function python_enable() {
-	eval "$(pyenv init -)"
-	if which pyenv-virtualenv-init > /dev/null; then
-		eval "$(pyenv virtualenv-init -)" &;
-	fi
-}
 
 # Go
 export GOPATH="${HOME}/Develop/go"

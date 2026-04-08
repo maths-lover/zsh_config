@@ -259,8 +259,8 @@ fi
 # ============================================================================
 
 alias py='python3'
-alias pip='pip3'
-alias venv='python3 -m venv'
+alias pip='uv pip'
+alias venv='uv venv'
 alias activate='source venv/bin/activate || source env/bin/activate || source .venv/bin/activate'
 
 # ============================================================================

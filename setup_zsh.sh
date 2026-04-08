@@ -272,34 +272,13 @@ if [[ "${PKG}" == "apt" ]] && command -v batcat >/dev/null 2>&1 && ! command -v 
 fi
 
 # ============================================================================
-# Phase 6 — Install pyenv
+# Phase 6 — Install uv
 # ============================================================================
-if ! command -v pyenv >/dev/null 2>&1; then
-    info "Installing pyenv"
-    if [[ "${PKG}" == "brew" ]]; then
-        brew install pyenv pyenv-virtualenv
-    else
-        # Install build dependencies for pyenv on Linux
-        case "${PKG}" in
-            apt)
-                sudo apt-get install -y build-essential libssl-dev zlib1g-dev \
-                    libbz2-dev libreadline-dev libsqlite3-dev libncursesw5-dev \
-                    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-                ;;
-            dnf)
-                sudo dnf install -y gcc make zlib-devel bzip2-devel \
-                    readline-devel sqlite-devel openssl-devel tk-devel \
-                    libffi-devel xz-devel
-                ;;
-            pacman)
-                sudo pacman -S --noconfirm --needed base-devel openssl zlib \
-                    bzip2 readline sqlite ncurses xz tk libffi
-                ;;
-        esac
-        curl -fsSL https://pyenv.run | bash
-    fi
+if ! command -v uv >/dev/null 2>&1; then
+    info "Installing uv"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
 else
-    ok "pyenv already installed"
+    ok "uv already installed"
 fi
 
 # ============================================================================

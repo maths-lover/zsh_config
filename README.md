@@ -12,7 +12,7 @@ The setup script will:
 
 - Install zsh and set it as the default shell
 - Install CLI tools: bat, eza, fd, fzf, ripgrep, zoxide, starship, neovim, fastfetch, git, tree
-- Install pyenv and build dependencies
+- Install uv (Python package manager)
 - Install zsh plugins (autosuggestions, syntax-highlighting, fzf-tab, zsh-nvm)
 - Create symlinks for `.zshenv`, `.zshrc`, `starship.toml`, and `ripgreprc`
 
